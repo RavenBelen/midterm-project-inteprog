@@ -17,6 +17,7 @@ using namespace std;
 #define PINK "\033[38;5;206m"
 #define ORANGE "\033[38;5;214m"
 
+string temp; //for input key to continue
 
 class Book {
 private:
@@ -159,6 +160,9 @@ public:
         getline(cin, category);
         if (!isValidCategory(category)) {
             cout << RED << "Invalid category! Choose Fiction or Non-fiction.\n" << RESET;
+            cout<<"Input any key to continue: "<<endl;
+            cin.ignore (); 
+            getline (cin, temp);
         }
     } while (!isValidCategory(category));
 
@@ -217,7 +221,11 @@ public:
 
     books[bookCount].setBook(id, isbn, title, author, edition, publication, category);
     bookCount++;
-    cout << GREEN << "Book added successfully!\n" << RESET <<endl;
+    cout << GREEN << "Book added successfully!\n" << RESET <<endl; 
+
+    cout << "Input any key to continue: ";
+    cin.ignore();  // Clear newline from buffer
+    getline(cin, temp);     // Wait for key press
 }
 
 
@@ -226,6 +234,9 @@ void editBook()
 {
     if (bookCount == 0) {
         cout << RED << "No Book in the Inventory\n" << RESET << endl;
+        cout << "Input any key to continue: ";
+	    cin.ignore();  // Clear newline from buffer
+	    getline(cin, temp);     // Wait for key press
         return;
     }
 
@@ -294,9 +305,9 @@ void editBook()
         cout << RED << "Book not found!\n" << RESET;
     }
 
-    cout<< MAGENTA << "Input any key to continue: ";
-    cin.ignore();  
-    cin.get();    
+    cout << "Input any key to continue: ";
+    cin.ignore();  // Clear newline from buffer
+    getline(cin, temp);     // Wait for key press
 }
 
 
@@ -304,6 +315,9 @@ void searchBook()
 		{
 		    if (bookCount == 0) {
 		        cout << RED << "No Book in the Inventory\n" << RESET;
+                cout << "Input any key to continue: ";
+                cin.ignore();  // Clear newline from buffer
+                getline(cin, temp);     // Wait for key press
 		        return;
 		    }
 		
@@ -332,9 +346,9 @@ void searchBook()
 		
 		    cout << RED << "Book not found!\n" << RESET;
 		    
-		    cout << "Input any key to continue: ";
-			cin.ignore();
-			cin.get();
+            cout << "Input any key to continue: ";
+            cin.ignore();  // Clear newline from buffer
+            getline(cin, temp);     // Wait for key press
 		}
 	
 
@@ -342,6 +356,9 @@ void searchBook()
 	{
 	    if (bookCount == 0) {
 	        cout << RED << "No Book in the Inventory\n" << RESET;
+            cout << "Input any key to continue: ";
+            cin.ignore();  // Clear newline from buffer
+            getline(cin, temp);     // Wait for key press
 	        return;
 	    }
 	
@@ -380,11 +397,17 @@ void searchBook()
 	    }
 	
 	    cout << RED << "Book not found!\n" << RESET;
+        cout << "Input any key to continue: ";
+	    cin.ignore();  // Clear newline from buffer
+	    getline(cin, temp);     // Wait for key press
 	}
 
 void viewBooksByCategory() {
     if (bookCount == 0) {
         cout << RED << "No Book in the Inventory\n" << RESET;
+        cout << "Input any key to continue: ";
+	    cin.ignore();  // Clear newline from buffer
+	    getline(cin, temp);     // Wait for key press
         return;
     }
 
@@ -403,6 +426,9 @@ void viewBooksByCategory() {
 
         if (!isValidCategory(category)) {
             cout << RED << "Invalid category! Choose Fiction or Non-fiction.\n" << RESET;
+            cout<<"Input any key to continue: ";
+            cin.ignore();
+            getline (cin, temp);
             continue; // Restart the loop if invalid input
         }
 
@@ -435,12 +461,14 @@ void viewBooksByCategory() {
         // Ask user if they want to select another category
         cout << YELLOW << "Would you like to select another category? (Y/N): " << RESET;
         cin >> choice;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer 
+
+        cout<<"Input any key to continue: "; 
+        cin.ignore(); 
+        getline (cin, temp); 
 
     } while (tolower(choice) == 'y');
 }
-
-
 
 
     void viewAllBooks() 
@@ -469,6 +497,11 @@ void viewBooksByCategory() {
 	
 	    // Print footer
 	    cout << PINK << "------------------------------------------------------------------------------------------------------------\n" << RESET;
+        
+        cout<<" Input any key to continue: "<<endl;
+        cin.ignore(); 
+        getline (cin, temp); 
+
 	}
 
 };
